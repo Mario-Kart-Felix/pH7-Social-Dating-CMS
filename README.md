@@ -1,0 +1,2 @@
+# pH7-Social-Dating-CMS
+😻 pH7Builder (formerly pH7CMS) :couple: is a Professional &amp; Open Source Social Dating CMS written in OOP PHP with the MVC pattern. This Social Dating Script wants to be low resource-intensive, powerful and secure. pH7CMS is included with 40+ modules and based on pH7Framework. It is also the first Professional, Free &amp; Open Source Social Dating Site Builder Software and the first choice for creating enterprise level Dating Apps/Service or Social Networking Sites
