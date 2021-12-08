@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Asset / File
  * @version          1.8
  */
@@ -33,7 +33,7 @@ class UpgradeCore
     /**
      * Remote update URL.
      */
-    const REMOTE_URL = 'http://update.ph7cms.com/';
+    const REMOTE_URL = 'https://update.ph7cms.com/';
     const ARCHIVE_EXT = '.zip';
     const MIN_SQL_FILE_SIZE = 12; // Size in bytes
 

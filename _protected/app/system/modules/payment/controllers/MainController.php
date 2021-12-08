@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Payment / Controller
  */
 
@@ -20,6 +20,9 @@ use PH7\Framework\Mail\Mail;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Payment\Gateway\Api\Api as ApiInterface;
 use stdClass;
+use Stripe\Charge as StripeCharge;
+use Stripe\Error\Base as StripeBase;
+use Stripe\Error\Card as StripeCard;
 
 class MainController extends Controller
 {
@@ -302,7 +305,7 @@ class MainController extends Controller
             $sAmount = $this->httpRequest->post('amount');
 
             try {
-                $oCharge = \Stripe\Charge::create(
+                $oCharge = StripeCharge::create(
                     [
                         'amount' => Stripe::getAmount($sAmount),
                         'currency' => $this->config->values['module.setting']['currency_code'],
@@ -324,10 +327,10 @@ class MainController extends Controller
                         $this->notification(Stripe::class, $iItemNumber);
                     }
                 }
-            } catch (\Stripe\Error\Card $oE) {
+            } catch (StripeCard $oE) {
                 // The card has been declined
                 // Do nothing here as "$this->bStatus" is by default FALSE and so it will display "Error occurred" msg later
-            } catch (\Stripe\Error\Base $oE) {
+            } catch (StripeBase $oE) {
                 $this->design->setMessage($this->str->escape($oE->getMessage(), true));
             }
         }

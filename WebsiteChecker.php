@@ -1,7 +1,7 @@
 <?php
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2018-2020, Pierre-Henry Soria. All Rights Reserved.
+ * @copyright      (c) 2018-2021, Pierre-Henry Soria. All Rights Reserved.
  * @license        See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @link           https://ph7cms.com
  * @package        PH7 / ROOT
@@ -15,7 +15,7 @@ use RuntimeException;
 
 class WebsiteChecker
 {
-    const REQUIRED_SERVER_VERSION = '5.6.0';
+    const REQUIRED_SERVER_VERSION = '7.4.0';
     const REQUIRED_CONFIG_FILE_NAME = '_constants.php';
     const INSTALL_FOLDER_NAME = '_install/';
 

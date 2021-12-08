@@ -53,8 +53,8 @@
       {/if}
 
 
-    {* Guest, Member and Admin menu (except for Affiliate) *}
-      {if !$is_aff_auth}
+    {* Guest, Member and LoginUserAs (except Affiliate & Admin) *}
+      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
         <li class="dropdown">
           <a href="{{ $design->url('user', 'browse', 'index') }}" title="{lang 'Members'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax">
             <i class="fa fa-users fa-fw"></i> {lang 'People'} <span class="caret"></span>
@@ -74,7 +74,9 @@
 
             {if $is_map_enabled}
               <li>
-                <a href="{{ $design->url('map', 'country', 'index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCity()) }}" title="{lang 'Users nearby through the map!'}"><i class="fa fa-map-marker"></i> {lang 'People Nearby'}</a>
+                <a href="{{ $design->url('map', 'country', 'index', Framework\Geo\Ip\Geo::getCountry() . PH7_SH. Framework\Geo\Ip\Geo::getCity()) }}" title="{lang 'Users nearby through the map!'}">
+                  <i class="fa fa-map-marker"></i> {lang 'People Nearby'}
+                </a>
               </li>
             {/if}
 
@@ -97,7 +99,7 @@
 
 
     {* Guest, Member and LoginUserAs from Admin Panel *}
-      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user }
+      {if (!$is_aff_auth AND !$is_admin_auth) OR $admin_logged_as_user}
         {if $is_chat_enabled OR $is_chatroulette_enabled}
           <li class="dropdown"><a href="#" title="{lang 'Free Social Dating Chat Rooms'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-weixin"></i> {lang 'Chat'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -139,15 +141,6 @@
           </li>
         {/if}
 
-        {if $is_game_enabled}
-          <li class="dropdown"><a href="{{ $design->url('game','main','index') }}" title="{lang 'Games Zone'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'} <span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
-              <li><a href="{{ $design->url('game','main','index') }}" rel="nofollow" title="{lang 'Games Zone'}" data-load="ajax"><i class="fa fa-gamepad"></i> {lang 'Game'}</a></li>
-              <li><a href="{{ $design->url('game','main','search') }}" title="{lang 'Search Games'}" data-load="ajax"><i class="fa fa-search"></i> {lang 'Search'}</a></li>
-            </ul>
-          </li>
-        {/if}
-
         {if $is_forum_enabled}
           <li class="dropdown"><a href="{{ $design->url('forum','forum','index') }}" title="{lang 'Forums'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown" data-load="ajax"><i class="fa fa-comments"></i> {lang 'Forum'} <span class="caret"></span></a>
             <ul class="dropdown-menu" role="menu">
@@ -169,7 +162,7 @@
 
 
     {* Member menu *}
-      {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user }
+      {if $is_user_auth AND ( !$is_aff_auth AND !$is_admin_auth ) OR $admin_logged_as_user}
           {if $is_mail_enabled}
             <li class="dropdown">
               <a href="{{ $design->url('mail','main','inbox') }}" title="{lang 'My Messages'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
@@ -281,7 +274,7 @@
 
 
     {* Admin menu *}
-      {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth ) }
+      {if $is_admin_auth AND ( !$is_user_auth AND !$is_aff_auth )}
         {{ $count_total_reports = ReportCoreModel::totalReports() }}
         <li class="dropdown">
           <a href="{{ $design->url(PH7_ADMIN_MOD,'user','index') }}" title="{lang 'Users/Admins Manager'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
@@ -368,15 +361,6 @@
 
             {if $is_note_enabled}
               <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}"><i class="fa fa-newspaper-o"></i> {lang 'Note'}</a></li>
-            {/if}
-
-            {if $is_game_enabled}
-              <li class="menu-item dropdown dropdown-submenu"><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown"><i class="fa fa-gamepad"></i> {lang 'Game'}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li><a href="{{ $design->url('game','admin','index') }}" title="{lang 'Admin Game'}">{lang 'Admin Game'}</a></li>
-                  <li><a href="{{ $design->url('game','admin','add') }}" title="{lang 'Add a Game'}">{lang 'Add a Game'}</a></li>
-                </ul>
-              </li>
             {/if}
 
             {if $is_affiliate_enabled}
@@ -466,7 +450,7 @@
               <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','video') }}" title="{lang 'Moderate Videos'}"><i class="fa fa-youtube-play"></i> {lang 'Videos'} {if $count_moderate_total_video }<span class="badge">{count_moderate_total_video}</span>{/if}</a></li>
             {/if}
 
-            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photos'} {if $count_moderate_total_avatar }<span class="badge">{count_moderate_total_avatar}</span>{/if}</a></li>
+            <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','avatar') }}" title="{lang 'Moderate Profile Photos'}"><i class="fa fa-picture-o"></i> {lang 'Profile Photos'} {if $count_moderate_total_avatar}<span class="badge">{count_moderate_total_avatar}</span>{/if}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','background') }}" title="{lang 'Moderate Profile Background'}"><i class="fa fa-picture-o"></i> {lang 'Profile Backgrounds'} {if $count_moderate_total_background}<span class="badge">{count_moderate_total_background}</span>{/if}</a></li>
 
             {if $is_note_enabled}
@@ -476,10 +460,6 @@
                   <li><a href="{{ $design->url('note','admin','index') }}" title="{lang 'Moderate Note Posts'}">{lang 'All Notes'}</a></li>
                 </ul>
               </li>
-            {/if}
-
-            {if $is_webcam_enabled}
-              <li><a href="{{ $design->url(PH7_ADMIN_MOD,'moderator','picturewebcam') }}" title="{lang 'Moderate the Webcam Pictures'}"><i class="fa fa-camera"></i> {lang 'Webcam Pictures'}</a></li>
             {/if}
           </ul>
         </li>
@@ -529,19 +509,6 @@
         </li>
 
         <li class="dropdown">
-          <a class="bold dropdown-toggle" href="{software_doc_url}" title="{lang 'Need some Helps?'}" role="button" aria-expanded="false" data-toggle="dropdown">
-            <i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span>
-          </a>
-          <ul class="dropdown-menu" role="menu">
-            <li><a class="bold" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Will You Be Nice Today? Like 81% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Be Nice Today?'} <span class="label label-primary">{lang 'HELP'}</span></a></li>
-            <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
-            <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
-            <li><a href="{software_forum_url}" title="{lang 'Discussions Board'}"><i class="fa fa-bug"></i> {lang 'Forums'}</a></li>
-            <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
           <a href="{{ $design->url(PH7_ADMIN_MOD,'account','index') }}" title="{lang 'My account'}" class="dropdown-toggle" role="button" aria-expanded="false" data-toggle="dropdown">
             <i class="fa fa-cog"></i> {lang 'Account'} <span class="caret"></span>
           </a>
@@ -549,6 +516,19 @@
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','edit') }}" title="{lang 'Edit My Account'}"><i class="fa fa-pencil fa-fw"></i> {lang 'Edit My Account'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'account','password') }}" title="{lang 'Change Password'}"><i class="fa fa-key fa-fw"></i> {lang 'Change Password'}</a></li>
             <li><a href="{{ $design->url(PH7_ADMIN_MOD,'main','logout') }}" title="{lang 'Logout'}"><i class="fa fa-sign-out"></i> {lang 'Logout'}</a></li>
+          </ul>
+        </li>
+
+        <li class="dropdown">
+          <a class="bold dropdown-toggle" href="{software_doc_url}" title="{lang 'Need some Helps?'}" role="button" aria-expanded="false" data-toggle="dropdown">
+            <i class="fa fa-life-ring"></i> {lang 'Help'} <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a class="bold" href="{{ $design->url('ph7cms-helper','main','suggestionbox','?box=donationbox') }}" title="{lang 'Will You Be Nice Today? Like 81% of our users who contribute on a regular basis.'}"><i class="fa fa-trophy"></i> {lang 'Will You Be Nice Today?'}</a></li>
+            <li><a href="{software_doc_url}" title="{lang 'Software Documentation'}"><i class="fa fa-book"></i> {lang 'Documentation'}</a></li>
+            <li><a href="{software_issue_url}" title="{lang 'Report a Problem'}"><i class="fa fa-bug"></i> {lang 'Report a Bug'}</a></li>
+            <li><a href="{software_forum_url}" title="{lang 'Discussions Board'}"><i class="fa fa-bug"></i> {lang 'Forums'}</a></li>
+            <li><a href="{software_review_url}" title="{lang 'Help pH7CMS by giving a nice review! Highly appreciated :)'}"><i class="fa fa-heart"></i> {lang 'Give Nice Review'}</a></li>
           </ul>
         </li>
       {/if}

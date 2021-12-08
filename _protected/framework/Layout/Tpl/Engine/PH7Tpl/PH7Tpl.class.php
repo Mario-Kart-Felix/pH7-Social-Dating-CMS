@@ -3,7 +3,7 @@
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @package          PH7 / Framework / Layout / Tpl / Engine / PH7Tpl
  * @copyright        (c) 2011-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  *
  * @history          Supports now PHP 5 with beautiful object code (POO), (removed all the ugly object code from PHP 4.x).
  * @history          Supports now PHP 5.3 (added namespace and incorporate the template engine into the pH7Framework).
@@ -644,7 +644,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @throws TplException If the template file could not be recovered or cannot be written.
      */
-    final private function compile()
+    private function compile()
     {
         // Create compile folder
         $this->file->createDir($this->sCompileDir2);
@@ -739,7 +739,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return bool
      */
-    final private function isMainCompilePage()
+    private function isMainCompilePage()
     {
         return preg_match(
             '#' . $this->addSlashes($this->sCompileDir . static::MAIN_COMPILE_DIR . PH7_DS . PH7_TPL_NAME . PH7_DS . static::MAIN_COMPILE_PAGE) . '#',
@@ -752,7 +752,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return bool
      */
-    final private function isXmlSitemapCompilePage()
+    private function isXmlSitemapCompilePage()
     {
         return preg_match('#' . static::XML_SITEMAP_COMPILE_PAGE . '#', $this->sCompileDirFile);
     }
@@ -764,7 +764,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return bool
      */
-    final private function isMainDir($sDirPath)
+    private function isMainDir($sDirPath)
     {
         return is_dir($sDirPath) && preg_match('#' . $this->addSlashes(PH7_PATH_TPL . PH7_TPL_NAME . PH7_DS) . '#', $sDirPath);
     }
@@ -774,7 +774,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return bool
      */
-    final private function checkDesignInstance()
+    private function checkDesignInstance()
     {
         return !empty($this->_aVars['design']) && $this->_aVars['design'] instanceof Design;
     }
@@ -784,7 +784,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return bool
      */
-    final private function isMarkCopyright()
+    private function isMarkCopyright()
     {
         // "link()" and "softwareComment()" can never be removed
         return $this->isKeywordFoundInCode('design->link()') &&
@@ -796,7 +796,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return bool
      */
-    final private function isSmallMarkCopyright()
+    private function isSmallMarkCopyright()
     {
         return $this->isKeywordFoundInCode('design->smallLink()');
     }
@@ -806,7 +806,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return bool Returns TRUE if it's not the base theme, FALSE otherwise.
      */
-    final private function notBaseTheme()
+    private function notBaseTheme()
     {
         return strpos($this->sTemplateDir, PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS) === false &&
             $this->isKeywordFoundInCode('$this->display(\'' . $this->getMainPage() . '\', PH7_PATH_TPL . PH7_DEFAULT_THEME . PH7_DS)');
@@ -876,7 +876,7 @@ Template Engine: ' . self::NAME . ' version ' . self::VERSION . ' by ' . self::A
      *
      * @return void
      */
-    final private function setErrMsg()
+    private function setErrMsg()
     {
         $this->sCode = sprintf(static::ERR_MSG, self::SOFTWARE_EMAIL);
     }

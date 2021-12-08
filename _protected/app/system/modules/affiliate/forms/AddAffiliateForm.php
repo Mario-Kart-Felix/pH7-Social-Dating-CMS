@@ -2,14 +2,13 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Affiliate / Form
  */
 
 namespace PH7;
 
 use PFBC\Element\Button;
-use PFBC\Element\CKEditor;
 use PFBC\Element\Country;
 use PFBC\Element\Date;
 use PFBC\Element\Email;
@@ -18,6 +17,7 @@ use PFBC\Element\HTMLExternal;
 use PFBC\Element\Password;
 use PFBC\Element\Phone;
 use PFBC\Element\Radio;
+use PFBC\Element\Textarea;
 use PFBC\Element\Textbox;
 use PFBC\Element\Token;
 use PFBC\Element\Url;
@@ -67,7 +67,7 @@ class AddAffiliateForm
         $oForm->addElement(new Textbox(t('State/Province:'), 'state', ['id' => 'str_state', 'validation' => new Str(2, 150), 'required' => 1]));
         $oForm->addElement(new Textbox(t('Postal Code:'), 'zip_code', ['id' => 'str_zip_code', 'validation' => new Str(2, 15), 'required' => 1]));
         $oForm->addElement(new Phone(t('Phone Number:'), 'phone', ['description' => t('Enter full phone number with area code (e.g., +44768374890).'), 'required' => 1]));
-        $oForm->addElement(new CKEditor(t('Description:'), 'description', ['description' => t("Description of the affiliate's site(s)."), 'validation' => new Str(10, 2000), 'required' => 1]));
+        $oForm->addElement(new Textarea(t('Description:'), 'description', ['description' => t("Description of the affiliate's site(s)."), 'validation' => new Str(10, 2000), 'required' => 1]));
         $oForm->addElement(new Url(t('Website:'), 'website', ['description' => t('Main website where the affiliate is the owner (e.g. http://ph7cms.com)'), 'required' => 1]));
         $oForm->addElement(new Email(t('Bank Account:'), 'bank_account', ['description' => t('Bank Account (PayPal Email Address).'), 'validation' => new BankAccount]));
         $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_STATIC . PH7_JS . 'geo/autocompleteCity.js"></script>'));

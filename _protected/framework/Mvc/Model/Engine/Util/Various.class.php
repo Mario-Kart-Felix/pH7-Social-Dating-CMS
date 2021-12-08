@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Mvc / Model / Engine / Util
  */
 
@@ -165,10 +165,6 @@ class Various
                 $sId = 'noteId';
                 break;
 
-            case DbTableName::GAME:
-                $sId = 'gameId';
-                break;
-
             case DbTableName::FORUM_TOPIC:
                 $sId = 'topicId';
                 break;
@@ -204,7 +200,6 @@ class Various
             case DbTableName::ALBUM_VIDEO:
             case DbTableName::PICTURE:
             case DbTableName::VIDEO:
-            case DbTableName::GAME:
             case DbTableName::BLOG:
             case DbTableName::NOTE:
                 return $sTable;

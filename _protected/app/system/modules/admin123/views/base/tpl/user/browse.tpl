@@ -113,7 +113,7 @@
                         <td class="small">
                             <a href="{{ $design->url('user', 'setting', 'edit', $user->profileId) }}" title="{lang "Edit User's Profile Information"}">{lang 'Edit'}</a> •
                             <a href="{{ $design->url('user', 'setting', 'avatar', "$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit User's Profile Photo"}">{lang 'Profile Photo'}</a> •
-                            <a href="{{ $design->url('user','setting','design', "$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit the Wallpaper of the User's Profile Page"}">{lang 'Wallpaper'}</a> •
+                            <a href="{{ $design->url('user', 'setting', 'design', "$user->profileId,$user->username,$user->firstName,$user->sex", false) }}" title="{lang "Edit the Wallpaper of the User's Profile Page"}">{lang 'Wallpaper'}</a> •
                             <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'password') }}/{% $user->email %}" title="{lang "Edit the User's Password"}">{lang 'Password'}</a>
                             {if $is_mail_enabled}
                                 • <a href="{{ $design->url('mail', 'main', 'compose', $user->username) }}" title="{lang 'Send a message to this user'}">{lang 'Send PM'}</a>
@@ -121,12 +121,12 @@
                             • <a href="{{ $design->url(PH7_ADMIN_MOD, 'user', 'loginuseras', $user->profileId) }}" title="{lang 'Login as the user (to edit all the user account).'}">{lang 'Login'}</a> •
 
                             {if $user->ban == UserCore::BAN_STATUS}
-                                {{ $design->popupLinkConfirm(t('Ban'), PH7_ADMIN_MOD, 'user', 'ban', $user->profileId) }}
-                            {else}
                                 {{ $design->popupLinkConfirm(t('UnBan'), PH7_ADMIN_MOD, 'user', 'unban', $user->profileId) }}
+                            {else}
+                                {{ $design->popupLinkConfirm(t('Ban'), PH7_ADMIN_MOD, 'user', 'ban', $user->profileId) }}
                             {/if}
 
-                            {if $user->active != 1}
+                            {if $user->active != RegistrationCore::NO_ACTIVATION}
                                 • {{ $design->popupLinkConfirm(t('Approve'), PH7_ADMIN_MOD, 'user', 'approve', $user->profileId) }}
                                 or {{ $design->popupLinkConfirm(t('Disapprove (notified user by email)'), PH7_ADMIN_MOD, 'user', 'disapprove', $user->profileId) }}
                             {/if}
@@ -137,11 +137,11 @@
                 {/each}
             </tbody>
         </table>
-
-        {if $total_users > UserMilestoneCore::MILLENARIAN_WEBSITE}
-            {manual_include 'milestone_reached.inc.tpl'}
-        {/if}
     </div>
 </form>
+
+{if $total_users > UserMilestoneCore::MILLENARIAN_WEBSITE}
+    {manual_include 'milestone_reached.inc.tpl'}
+{/if}
 
 {main_include 'page_nav.inc.tpl'}

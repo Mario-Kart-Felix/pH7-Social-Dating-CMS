@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
@@ -73,17 +73,11 @@ class RssController extends MainController implements XmlControllable
             case 'forum-topic':
                 $this->sAction = $sAction;
                 break;
-
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':
             case 'comment-picture':
             case 'comment-video':
-            case 'comment-game':
-                $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router
-                $this->sAction = 'comment.inc';
-                break;
-
             case 'forum-post':
                 if ($this->isParamValid($mParam)) {
                     $this->view->setCaching(false); // We disable the cache since they are dynamic pages managed by the router

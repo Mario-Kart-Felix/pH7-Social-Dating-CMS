@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Form / Processing
  */
 
@@ -149,14 +149,17 @@ class EditNoteFormProcess extends Form implements NudityDetectable
      */
     private function updateCategories($iNoteId, $iProfileId, stdClass $oPost, NoteModel $oNoteModel)
     {
-        if (!$this->str->equals($this->httpRequest->post('category_id', Http::NO_CLEAN), $oPost->categoryId)) {
-            if (count($this->httpRequest->post('category_id', Http::NO_CLEAN)) > Note::MAX_CATEGORY_ALLOWED) {
+        $aCategoryIds = $this->httpRequest->post('category_id', Http::NO_CLEAN);
+
+        if (!empty($aCategoryIds) && is_array($aCategoryIds)) {
+            if (count($aCategoryIds) > Note::MAX_CATEGORY_ALLOWED) {
                 return false;
             }
 
+            // First, delete the categories, in order to update them after with the new changes.
             $oNoteModel->deleteCategory($iNoteId);
 
-            foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
+            foreach ($aCategoryIds as $iCategoryId) {
                 $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
             }
         }

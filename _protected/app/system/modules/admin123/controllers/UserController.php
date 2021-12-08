@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 
@@ -21,6 +21,8 @@ use PH7\Framework\Util\Various;
 
 class UserController extends Controller
 {
+    use BulkAction;
+
     const PROFILES_PER_PAGE = 15;
     const SEARCH_NOT_FOUND_REDIRECT_DELAY = 2; // Seconds
 
@@ -280,10 +282,13 @@ class UserController extends Controller
 
     public function approveAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->moderateRegistration($iId, 1);
             }
@@ -297,10 +302,13 @@ class UserController extends Controller
 
     public function disapproveAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
                 $this->sMsg = $this->moderateRegistration($iId, 0);
             }
@@ -353,7 +361,7 @@ class UserController extends Controller
             $iId = (int)$aData[0];
             $sUsername = (string)$aData[1];
 
-            $this->oUser->delete($iId, $sUsername);
+            $this->oUser->delete($iId, $sUsername, new UserCoreModel);
 
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'user', 'browse'),
@@ -370,10 +378,13 @@ class UserController extends Controller
 
     public function banAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAdminModel->ban($iId, 1);
@@ -391,10 +402,13 @@ class UserController extends Controller
 
     public function unBanAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new SecurityToken)->check('user_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sAction) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sAction) {
                 $iId = (int)explode('_', $sAction)[0];
 
                 $this->oAdminModel->ban($iId, 0);
@@ -411,17 +425,24 @@ class UserController extends Controller
 
     public function deleteAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         try {
             if (!(new SecurityToken)->check('user_action')) {
                 $this->sMsg = Form::errorTokenMsg();
-            } elseif (count($this->httpRequest->post('action')) > 0) {
-                foreach ($this->httpRequest->post('action') as $sAction) {
+            } elseif ($bActionsEligible) {
+                $oUserModel = new UserCoreModel;
+
+                foreach ($aActions as $sAction) {
                     $aData = explode('_', $sAction);
                     $iId = (int)$aData[0];
                     $sUsername = (string)$aData[1];
 
-                    $this->oUser->delete($iId, $sUsername);
+                    $this->oUser->delete($iId, $sUsername, $oUserModel);
                 }
+                unset($oUserModel);
+
                 $this->sMsg = t('The profile(s) has/have been deleted.');
             }
 
@@ -492,7 +513,7 @@ class UserController extends Controller
 
                     $this->oUser->clearReadProfileCache($oUser->profileId);
 
-                    $sOutputMsg = t('Done!');
+                    $sOutputMsg = t('Done! ✔');
                 } else {
                     $sOutputMsg = t('Error! Bad argument in the URL.');
                 }

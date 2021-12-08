@@ -70,9 +70,6 @@
     <!-- Hot Or Not -->
       <route url="hot-or-not" path="system/modules" module="hotornot" controller="main" action="rating" />
 
-    <!-- Webcam -->
-      <route url="picture-webcam" path="system/modules" module="webcam" controller="webcam" action="picture" />
-
     <!-- Mail -->
       <route url="mail/compose/?([a-zA-Z0-9_-]+)?/?([^/]+)?" path="system/modules" module="mail" controller="main" action="compose" vars="recipient,title" />
       <route url="mail/outbox/?([0-9]+)?" path="system/modules" module="mail" controller="main" action="outbox" vars="id" />
@@ -142,14 +139,6 @@
       <route url="comment/edit/([a-zA-Z]+)/([0-9]+)/([0-9]+)/([0-9]+)" path="system/modules" module="comment" controller="comment" action="edit" vars="table,recipient,sender,id" />
       <route url="comment/read/([a-zA-Z]+)/([0-9]+)" path="system/modules" module="comment" controller="comment" action="read" vars="table,id" />
       <route url="comment/post/([a-zA-Z]+)/([0-9]+)" path="system/modules" module="comment" controller="comment" action="post" vars="table,id" />
-
-    <!-- Game -->
-      <route url="free-online-game" path="system/modules" module="game" controller="main" action="index" />
-      <route url="game/([^/]+)/([0-9]+)" path="system/modules" module="game" controller="main" action="game" vars="title,id" />
-      <route url="game/category/([^/]+)/?([a-zA-Z]+)?/?([a-zA-Z]+)?" path="system/modules" module="game" controller="main" action="category" vars="name,order,sort" />
-      <route url="download/game/([0-9]+)" path="system/modules" module="game" controller="main" action="download" vars="id" />
-      <!-- admin -->
-      <route url="game/admin/edit/([^/]+)/([0-9]+)" path="system/modules" module="game" controller="admin" action="edit" vars="title,id" />
 
     <!-- Chat -->
       <route url="free-chat-room" path="system/modules" module="chat" controller="home" action="index" />

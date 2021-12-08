@@ -5,7 +5,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class / Design
  * @version        1.3
  *
@@ -21,6 +21,7 @@ use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Pattern\Statik;
 use PH7\Framework\Video\Api as VideoApi;
 use PH7\Framework\Video\InvalidApiProviderException;
+use stdClass;
 
 class VideoDesignCore
 {
@@ -39,7 +40,7 @@ class VideoDesignCore
     /**
      * Generates HTML contents Video.
      *
-     * @param \stdClass $oData
+     * @param stdClass $oData
      * @param string $sMedia Type of the media ('preview' or 'movie').
      * @param int $iWidth
      * @param int $iHeight

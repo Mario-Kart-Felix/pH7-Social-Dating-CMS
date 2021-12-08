@@ -4,7 +4,7 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Lang / FR
  */
 
@@ -33,7 +33,7 @@ $LANG = array(
     'license_agreements' => 'Licence et Accords',
     'license_agreements_desc' => 'Veuillez lire la licence et les accords attentivement et de les accepter avant de continuer l\'installation du logiciel.',
     'register' => 'Enregistrer !',
-    'site_name' => 'Nom de votre site',
+    'site_name' => 'Nom unique pour votre site',
     'agree_license' => 'J\'ai lu et j\'accepte les Termes de licence ci-dessus.',
     'conform_to_laws' => 'J\'accepte de toujours garder mon site web entièrement légal et de me conformer à toutes lois et régulations applicables susceptibles de s\'appliquer à moi, à mon entreprise, à mon site web et ses utilisateurs, et de vérifier et <a href="https://ph7cms.com/doc/en/how-to-edit-the-static-and-legal-pages" target="_blank" rel="noopener">mettre à jour les "CGU", "charte de confidentialité", "mentions légales" (et toutes autres pages légales nécessaires)</a> afin de me conformer pleinement aux lois et régulations applicables.',
     'responsibilities_agreement' => 'J\'accepte d\'utiliser ce logiciel à mes risques et périls et que l\'auteur de ce logiciel ne pourra en aucun cas être tenu responsable des dommages-intérêts directs ou indirects, ni de tout autre dommage de quelque nature que ce soit, résultant de l\'utilisation de ce logiciel ou de l\'impossibilité d\'utiliser le logiciel pour quelque raison que ce soit.',
@@ -104,7 +104,7 @@ $LANG = array(
             Votre mot de passe est : <em>****** (caché pour des raisons de sécurité. C\'est celui choisi durant l\'installation).</em>
         </p>
         <p>N\'oubliez pas de vous la péter en montrant votre nouveau service de rencontre à tous vos amis, vos collègues et vos potes de Facebook (et même à vos ennemis... ou pas).</p>
-        <p><strong>Voici un <a href="' . get_tweet_post("Viens de créer mon #AppDeRencontre avec #pH7CMS 😍 %s \n%s #ScriptRencontre 💪", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO_URL) . '">un Tweet pré-écrit</a> (que vous pouvez éditer, bien sûr)</strong>.</p>
+        <p><strong>Voici un <a href="' . get_tweet_post("Viens de créer mon #AppDeRencontre avec #pH7Builder 😍 %s \n%s #ScriptRencontre 💪", Controller::SOFTWARE_TWITTER, Controller::SOFTWARE_GIT_REPO_URL) . '">un Tweet pré-écrit</a> (que vous pouvez éditer, bien sûr)</strong>.</p>
         <p>&nbsp;</p>
         <p><strong>Allez-vous m\'aider à améliorer le logiciel ? <a href="' . Controller::PATREON_URL . '">Faire une donation ici</a></strong></p>
         <p>&nbsp;</p>

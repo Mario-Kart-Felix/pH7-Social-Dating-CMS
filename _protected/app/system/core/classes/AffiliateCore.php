@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
@@ -101,7 +101,7 @@ class AffiliateCore extends UserCore
     /**
      * Update the Affiliate Commission.
      *
-     * @param integer $iAffId Affiliate ID
+     * @param int $iAffId Affiliate ID
      * @param Config $oConfig
      * @param Registry $oRegistry
      *
@@ -128,13 +128,14 @@ class AffiliateCore extends UserCore
     /**
      * Delete Affiliate.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
+     * @param UserCoreModel $oAffModel
      *
      * @return void
      */
-    public function delete($iProfileId, $sUsername)
+    public function delete($iProfileId, $sUsername, UserCoreModel $oAffModel)
     {
-        (new AffiliateCoreModel)->delete($iProfileId, $sUsername);
+        $oAffModel->delete($iProfileId, $sUsername);
     }
 }

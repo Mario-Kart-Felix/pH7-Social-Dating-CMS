@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
@@ -11,8 +11,9 @@ namespace PH7;
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
 use PH7\Framework\Cookie\Cookie;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Ip\Ip;
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Model\DbConfig;
@@ -84,14 +85,15 @@ class UserCore
     /**
      * Delete User.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
+     * @param UserCoreModel $oUserModel
      *
      * @return void
      *
      * @throws ForbiddenActionException
      */
-    public function delete($iProfileId, $sUsername)
+    public function delete($iProfileId, $sUsername, UserCoreModel $oUserModel)
     {
         if ($this->isGhost($sUsername)) {
             throw new ForbiddenActionException('You cannot delete this profile!');
@@ -105,7 +107,7 @@ class UserCore
         $oFile->deleteDir(PH7_PATH_PUBLIC_DATA_SYS_MOD . 'note/' . PH7_IMG . $sUsername);
         unset($oFile);
 
-        (new UserCoreModel)->delete($iProfileId, $sUsername);
+        $oUserModel->delete($iProfileId, $sUsername);
 
         /* Clean UserCoreModel and Avatar Cache */
         (new Cache)
@@ -124,7 +126,7 @@ class UserCore
      * @return bool TRUE if success, FALSE if the extension is wrong.
      *
      * @throws Framework\File\Permission\PermissionException
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
+     * @throws PH7InvalidArgumentException
      */
     public function setAvatar($iProfileId, $sUsername, $sFile, $iApproved = 1)
     {
@@ -136,14 +138,14 @@ class UserCore
             error_reporting(0);
         }
 
-        $oAvatar1 = new Image(
+        $oAvatar1 = new FileStorageImage(
             $sFile,
             self::MAX_WIDTH_AVATAR,
             self::MAX_HEIGHT_AVATAR
         );
 
         if (!$oAvatar1->validate()) {
-            return false; // File type incompatible!
+            return false; // File type incompatible
         }
 
         // We removes the old avatar if it exists and we delete the cache at the same time.
@@ -205,7 +207,7 @@ class UserCore
     /**
      * Delete the avatar (image) and track database.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void
@@ -246,7 +248,7 @@ class UserCore
     /**
      * Set a background on user profile.
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      * @param string $sFile
      * @param int $iApproved (1 = approved | 0 = pending)
@@ -265,7 +267,7 @@ class UserCore
             error_reporting(0);
         }
 
-        $oWallpaper = new Image(
+        $oWallpaper = new FileStorageImage(
             $sFile,
             self::MAX_WIDTH_BACKGROUND_IMAGE,
             self::MAX_HEIGHT_BACKGROUND_IMAGE
@@ -297,7 +299,7 @@ class UserCore
     }
 
     /**
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param string $sUsername
      *
      * @return void
@@ -579,7 +581,7 @@ class UserCore
      * This method is a wrapper for the cache of the profile of users.
      * Clean UserCoreModel / readProfile Cache
      *
-     * @param integer $iId Profile ID.
+     * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER
      *
      * @return void
@@ -593,7 +595,7 @@ class UserCore
      * This method is a wrapper for the Info Fields cache.
      * Clean UserCoreModel / infoFields Cache
      *
-     * @param integer $iId Profile ID.
+     * @param int $iId Profile ID.
      * @param string $sTable Default DbTableName::MEMBER_INFO
      *
      * @return void
@@ -617,7 +619,7 @@ class UserCore
      * Generic method to clear the user cache.
      *
      * @param string $sId Cache ID.
-     * @param integer $iId User ID.
+     * @param int $iId User ID.
      * @param string $sTable Table name.
      *
      * @return void

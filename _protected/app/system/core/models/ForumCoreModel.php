@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
 
@@ -66,14 +66,14 @@ class ForumCoreModel extends Model
      * @param int $iTopicId
      * @param int|null $iMessageId
      * @param int|null $iProfileId
-     * @param string $sApproved
+     * @param string $sApproved '1' = Approved | '0' = Pending
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sSort
      *
      * @return array|stdClass|false
      */
-    public function getMessage($iTopicId, $iMessageId = null, $iProfileId = null, $sApproved, $iOffset, $iLimit, $sSort = Db::ASC)
+    public function getMessage($iTopicId, $iMessageId, $iProfileId, $sApproved, $iOffset, $iLimit, $sSort = Db::ASC)
     {
         $iOffset = (int)$iOffset;
         $iLimit = (int)$iLimit;

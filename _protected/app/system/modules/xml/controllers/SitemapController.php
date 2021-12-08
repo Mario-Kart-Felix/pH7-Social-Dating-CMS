@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
@@ -80,19 +80,11 @@ class SitemapController extends MainController implements XmlControllable
             case 'comment':
             case 'picture':
             case 'video':
-            case 'game':
-                $this->sAction = $sAction;
-                break;
-
             case 'comment-profile':
             case 'comment-blog':
             case 'comment-note':
             case 'comment-picture':
             case 'comment-video':
-            case 'comment-game':
-                $this->view->setCaching(false); // Disable the cache since they are dynamic pages managed by the router
-                $this->sAction = 'comment.inc';
-                break;
 
             default:
                 $this->displayPageNotFound(t('Sitemap Not Found!'));

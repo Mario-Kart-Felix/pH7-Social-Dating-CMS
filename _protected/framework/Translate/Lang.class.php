@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2010-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Translate
  */
 
@@ -256,7 +256,6 @@ namespace PH7\Framework\Translate {
 
             mb_internal_encoding(PH7_ENCODING);
             mb_http_output(PH7_ENCODING);
-            mb_http_input(PH7_ENCODING);
             mb_language('uni');
             mb_regex_encoding(PH7_ENCODING);
         }

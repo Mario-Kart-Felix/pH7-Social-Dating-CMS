@@ -2,14 +2,16 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Model
  */
 
 namespace PH7;
 
+use PDO;
 use PH7\Framework\Mvc\Model\Engine\Db;
 use PH7\Framework\Mvc\Model\Engine\Model;
+use stdClass;
 
 class PictureCoreModel extends Model
 {
@@ -21,14 +23,14 @@ class PictureCoreModel extends Model
     /**
      * @param null|int $iProfileId
      * @param null|int $iAlbumId
-     * @param string $sApproved
+     * @param string $sApproved '1' = Approved | '0' = Pending
      * @param int $iOffset
      * @param int $iLimit
      * @param string $sOrder
      *
-     * @return \stdClass|array
+     * @return stdClass|array
      */
-    public function album($iProfileId = null, $iAlbumId = null, $sApproved = '1', $iOffset, $iLimit, $sOrder = self::CREATED)
+    public function album($iProfileId, $iAlbumId, $sApproved, $iOffset, $iLimit, $sOrder = self::CREATED)
     {
         $this->cache->start(self::CACHE_GROUP, 'album' . $iProfileId . $iAlbumId . $sApproved . $iOffset . $iLimit . $sOrder, static::CACHE_TIME);
 
@@ -47,21 +49,21 @@ class PictureCoreModel extends Model
 
             $rStmt = Db::getInstance()->prepare($sSqlQuery);
             if ($bIsProfileId) {
-                $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
+                $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
             }
 
             if ($bIsAlbumId) {
-                $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+                $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
             }
 
-            $rStmt->bindValue(':approved', $sApproved, \PDO::PARAM_STR);
+            $rStmt->bindValue(':approved', $sApproved, PDO::PARAM_STR);
 
-            $rStmt->bindParam(':offset', $iOffset, \PDO::PARAM_INT);
-            $rStmt->bindParam(':limit', $iLimit, \PDO::PARAM_INT);
+            $rStmt->bindParam(':offset', $iOffset, PDO::PARAM_INT);
+            $rStmt->bindParam(':limit', $iLimit, PDO::PARAM_INT);
 
             $rStmt->execute();
 
-            $mData = ($bIsProfileId && $bIsAlbumId) ? $rStmt->fetch(\PDO::FETCH_OBJ) : $rStmt->fetchAll(\PDO::FETCH_OBJ);
+            $mData = ($bIsProfileId && $bIsAlbumId) ? $rStmt->fetch(PDO::FETCH_OBJ) : $rStmt->fetchAll(PDO::FETCH_OBJ);
             Db::free($rStmt);
             $this->cache->put($mData);
         }
@@ -83,10 +85,10 @@ class PictureCoreModel extends Model
         $sSqlPictureId = $bIsPictureId ? ' AND pictureId = :pictureId ' : '';
         $sSql = 'DELETE FROM' . Db::prefix(DbTableName::PICTURE) . 'WHERE profileId = :profileId AND albumId = :albumId' . $sSqlPictureId;
         $rStmt = Db::getInstance()->prepare($sSql);
-        $rStmt->bindValue(':profileId', $iProfileId, \PDO::PARAM_INT);
-        $rStmt->bindValue(':albumId', $iAlbumId, \PDO::PARAM_INT);
+        $rStmt->bindValue(':profileId', $iProfileId, PDO::PARAM_INT);
+        $rStmt->bindValue(':albumId', $iAlbumId, PDO::PARAM_INT);
         if ($bIsPictureId) {
-            $rStmt->bindValue(':pictureId', $iPictureId, \PDO::PARAM_INT);
+            $rStmt->bindValue(':pictureId', $iPictureId, PDO::PARAM_INT);
         }
 
         return $rStmt->execute();

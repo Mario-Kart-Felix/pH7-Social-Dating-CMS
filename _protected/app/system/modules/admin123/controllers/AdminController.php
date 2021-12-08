@@ -4,7 +4,7 @@
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / Controller
  */
 
@@ -19,6 +19,8 @@ use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
 {
+    use BulkAction;
+
     const PROFILES_PER_PAGE = 15;
 
     /** @var AdminModel */
@@ -26,9 +28,6 @@ class AdminController extends Controller
 
     /** @var string */
     private $sTitle;
-
-    /** @var string */
-    private $sMsg;
 
     /** @var int */
     private $iCurrentAdminId;
@@ -133,19 +132,19 @@ class AdminController extends Controller
             $sUsername = (string)$aData[1];
 
             if ($iId === $this->iCurrentAdminId) {
-                Header::redirect(
-                    Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
-                    t('You cannot remove your own admin profile.'),
-                    Design::ERROR_TYPE
-                );
+                $sMsgType = Design::ERROR_TYPE;
+                $sMsg = t('Oops! You cannot remove your own admin profile.');
             } else {
                 (new Admin)->delete($iId, $sUsername, $this->oAdminModel);
-
-                Header::redirect(
-                    Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
-                    t('The admin has been deleted.')
-                );
+                $sMsgType = Design::SUCCESS_TYPE;
+                $sMsg = t('The admin has been deleted.');
             }
+
+            Header::redirect(
+                Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
+                $sMsg,
+                $sMsgType
+            );
         } catch (ForbiddenActionException $oExcept) {
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
@@ -157,27 +156,35 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
+        // Default redirect message state
+        $sMsgType = Design::SUCCESS_TYPE;
+        $sMsg = t('The admin(s) has/have been deleted.');
+
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         try {
             if (!(new SecurityToken)->check('admin_action')) {
-                $this->sMsg = Form::errorTokenMsg();
-            } elseif (count($this->httpRequest->post('action')) > 0) {
-                foreach ($this->httpRequest->post('action') as $sAction) {
+                $sMsg = Form::errorTokenMsg();
+            } elseif ($bActionsEligible) {
+                foreach ($aActions as $sAction) {
                     $aData = explode('_', $sAction);
                     $iId = (int)$aData[0];
                     $sUsername = (string)$aData[1];
 
                     if ($iId === $this->iCurrentAdminId) {
-                        $this->sMsg = t('Oops! You cannot remove your own admin profile.');
+                        $sMsgType = Design::ERROR_TYPE;
+                        $sMsg = t('Oops! You cannot remove your own admin profile.');
                     } else {
                         (new Admin)->delete($iId, $sUsername, $this->oAdminModel);
                     }
                 }
-                $this->sMsg = t('The admin(s) has/have been deleted.');
             }
 
             Header::redirect(
                 Uri::get(PH7_ADMIN_MOD, 'admin', 'browse'),
-                $this->sMsg
+                $sMsg,
+                $sMsgType
             );
         } catch (ForbiddenActionException $oExcept) {
             Header::redirect(

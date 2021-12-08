@@ -9,7 +9,7 @@
 
 **pH7's Social Dating Solution™** is a **Professional**, **Open Source** All-Inclusive **Turnkey Dating Software**. Fully responsive design, low-resource-intensive, powerful and very secure.
 
-pH7CMS (currently known as **pH7Builder**) offers 42 modules and based on its homemade framework (pH7Framework).
+pH7CMS (currently known as **pH7Builder**) offers 40+ modules and based on its homemade framework (pH7Framework).
 
 pH7Builder is the first Professional, Free and Open Source Social Dating Site Builder Software. By far, the first choice for creating enterprise-level Dating Apps/Service or social networking sites.
 
@@ -21,7 +21,7 @@ With **[pH7CMS](https://sourceforge.net/projects/ph7socialdating/files/latest/do
 
 ![Professional PHP Social Dating Builder Software](https://cloud.githubusercontent.com/assets/1325411/19419476/5475b32c-93d0-11e6-9756-8e7db8df129f.png)
 
-### 🤗 100% Owned by You ❤
+### 🤗 100% Owned by YOU ❤
 
 **Don't let your webapp be controlled by others! 🚀**
 
@@ -30,13 +30,35 @@ By choosing pH7CMS, you have complete control of your website and your users!
 You get and own all data and files, hosted on your own server! ✌️
 
 
-## 👀 Software Overview
+👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
 
-**pH7 Dating CMS** is a **Social community CMS** based on a powerful modular OOP architecture, fully compatible and highly optimized for PHP 7+ and based on **MVC** architecture (Model-View-Controller).
+
+## 📖 Contents
+
+- [Software Overview](#-software-overview-)
+  - [Features](#-how-powerful-your-social-dating-webapp-will-be-)
+- [Requirements](#-requirements)  
+- [Installation](#-installation)
+  - [Nginx Configuration (only for nginx server)](#-nginx-configuration)
+- [Translations](#-translations)
+- [Resources / Documentation](#-documentation)
+- [Contributing to the project](#-contributing)
+- [License](#%EF%B8%8F-license)
+- [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)  
+- [The toolsets I use](#-toolssoftware-used-to-develop-ph7cms)
+- [About Me](#-the-cook)
+  - [Contact Me](#-contact)
+  - [Hire Me?](#-hire-me-at-your-company)
+  - [Offer me a cup of tea?](#-offer-me-a-cup-of-tea-or-tea-bags-)
+
+
+## 👀 Software Overview 🎉
+
+**pH7 Dating CMS** is a **Social community CMS** based on a powerful modular OOP architecture, and using the **MVC** architecture (Model-View-Controller).
 
 It is designed with the **KISS** principle in mind, and the whole source code can be read and understood in minutes. For better flexibility, the software uses **PDO** (PHP Data Objects) abstraction which allows the choice of the database. The principle of development is **DRY** (Don't Repeat Yourself) aimed at reducing repetition of information of all kinds (no duplicate code) and **YAGNI** principle to avoid unused code/not needed functionality in the software.
 
-This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 42 system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
+This Free and Open Source **Social Dating Site Builder** wants to be low resource-intensive, powerful, stable and secure. The software also comes with 40+ system modules and is based on **pH7Framework** *(written specifically for this project)* that has over 52 packages.
 
 *To summarize, **pH7CMS** gives you **the perfect ingredients** to create the **best online dating service** or **social networking** website on the World Wide Web!*
 
@@ -67,9 +89,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Chat Rooms
 * Chatroulette
 * Instant Messenger (IM module)
-* Games (with high quality and viral games installed)
-* Webcam Shot
-* Affiliate
+* In-built affiliate system (that encourages brand influencers/ambassadors to promote your dating platform)
 * Newsletter
 * Activity Streams
 * User Mentions (using the “@” symbol with the username such as [@pH-7](https://github.com/pH-7))
@@ -133,7 +153,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 * Anyone can easily contribute to pH7CMS project thanks to the [GitHub repository](https://github.com/pH7Software/pH7-Social-Dating-CMS)
 
 
-**It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating web app or social networking website**
+**It's not a hazard that pH7CMS is considered to be the first choice for creating an enterprise level dating Web application or a social networking platform**
 
 *Great features [like here](https://ph7cms.com/social-dating-features/) and many other unique and exclusive features are waiting for YOU. Already released in pH7CMS!*
 
@@ -142,7 +162,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
 ## ⚙ Requirements
 
-* **Application Server** PHP 5.6 or higher (recommended version: **PHP 7.0.4** or higher).
+* **Application Server** PHP 7.4 or higher. Compatible with **PHP 8** as well! 🚀
 
 * **Database** MySQL/MariaDB 5.5.3 or higher.
 
@@ -163,7 +183,7 @@ This Free and Open Source **Social Dating Site Builder** wants to be low resourc
 
   * Github:
     * Clone pH7CMS from Github `git clone git@github.com:pH7Software/pH7-Social-Dating-CMS.git`
-      (use `--depth=1` if you don't need the history)
+      (use `--depth=1` if you don't need the git history)
     * [Install Composer](https://getcomposer.org/doc/00-intro.md)
     * From a command line opened in the folder, run `composer install` to install pH7CMS's dependencies.
   * Composer:
@@ -232,12 +252,12 @@ Designed & Coded with lots of ❤ by [Pierre-Henry Soria](https://ph7.me). A SUP
 
 ## 🤝 Hire Me At Your Company?
 
-Do you need a software engineer like me (and willing to relocate) at your company..? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
+Do you need a software engineer like me (and willing to relocate) at your company? **[Let's chat together](https://www.linkedin.com/in/ph7enry/)**! 😊
 
 
 ## 💲 Offer Me A Cup of Tea? (...or tea bags...) 🍵
 
-You appreciate the project, the several years I spent on it, and don't want to let it die...?
+You appreciate the project, all the years intensively spent on the core development, and don't want to let it die...?
 
 [![Paypal](templates/system/modules/ph7cms-helper/themes/base/img/paypal-donate.en.png)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=X457W3L7DAPC6)
 [![Patreon](templates/system/modules/ph7cms-helper/themes/base/img/support-patreon.en.png)](https://www.patreon.com/bePatron?u=3534366 "Become a Patron")
@@ -279,29 +299,31 @@ pH7CMS's templates also use lighter colors since LCD monitors use less electrici
 Finally, **please consider using green Web hosting** (which use Green Power supply).
 
 
--> Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 😉 <-
+👉 Other [10 Easy Ways to Green Your Social Community](https://mashable.com/2010/01/01/green-your-web-site/) 👈
 
 
-## Calculate Carbon Footprint of your Social Dating Service 🌍
+## 💪 Calculate Carbon Footprint of your Social Dating Service 🌍
 
  How is your website impacting the planet? => Check it on the Website Carbon Calculator such as [https://www.websitecarbon.com](https://www.websitecarbon.com)
 
 
 ## 🔨 Tools/Software Used to Develop pH7CMS
 
-* LAMP on **Fedora/Ubuntu** (and Mac/Windows with MAMP/WampServer/XAMPP for testing purpose)
+* LAMP on **Fedora/Ubuntu** (and Mac/Windows with MAMP/WampServer/XAMPP for testing purpose).
 
 * **Geany &amp; Sublime Text** for coding the whole project. That's it! However, since pH7CMS 5.0, **PhpStorm** (and sometimes Atom) are used as well.
 
+* **Sequel Pro**, sometimes for easy GUI database viewing.
+
 * **GIMP** for editing the assets, etc.
 
-* **Trimage** (and **ImageOptim** when developing on Mac) for compressing &amp; optimizing the images
+* **Trimage** (and **ImageOptim** when developing on Mac) for compressing &amp; optimizing the images.
 
-* **Poedit** for translating the Gettext files
+* **Poedit** for translating the Gettext files.
 
-* **FileZilla** for FTP client
+* **FileZilla** for FTP client.
 
-* **Git** for the version control system
+* **Git** for the version control system.
 
 * Sometimes, when working on Mac, **Sequel Pro** is used to lookup easily at a database.
 
@@ -313,10 +335,9 @@ Feel free to send me an email for any suggestions or feedback you may have 🤩,
 
 ## ⚖️ License
 
-**pH7CMS** is generously distributed under **Open Source, Free** License.
+**pH7Builder** (AKA pH7CMS) is an open-source software generously distributed under the [MIT](https://opensource.org/licenses/MIT).
 
-License: [General Public License 3](https://www.gnu.org/licenses/gpl.html) or later; See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for more details.
-
+See the *PH7.LICENSE.txt* and *PH7.COPYRIGHT.txt* files for further details.
 
 
 ---

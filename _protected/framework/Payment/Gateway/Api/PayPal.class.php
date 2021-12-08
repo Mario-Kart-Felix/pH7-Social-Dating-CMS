@@ -4,7 +4,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Payment / Gateway / Api
  * @version          1.4
  */
@@ -128,11 +128,14 @@ class PayPal extends Provider implements Api
      */
     protected function getStatus()
     {
+        // CURLOPT_SSL_VERIFYPEER is available only with PHP >= 7.1
+        $iSslVerifyPeer = defined('CURLOPT_SSL_VERIFYPEER') ? CURLOPT_SSL_VERIFYPEER : 64;
+
         $rCh = curl_init($this->sUrl);
         curl_setopt($rCh, CURLOPT_POST, 1);
         curl_setopt($rCh, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($rCh, CURLOPT_POSTFIELDS, $this->sRequest);
-        curl_setopt($rCh, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($rCh, $iSslVerifyPeer, 1);
         curl_setopt($rCh, CURLOPT_SSL_VERIFYHOST, 2);
         curl_setopt($rCh, CURLOPT_HTTPHEADER, [sprintf('Host: %s', self::PAYPAL_HOST)]);
         $mRes = curl_exec($rCh);

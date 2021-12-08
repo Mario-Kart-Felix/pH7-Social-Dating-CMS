@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From
  */
 
@@ -332,10 +332,6 @@ class SettingForm
             $oForm->addElement(new Select(t('Videos Manual Approval:'), 'video_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['value' => DbConfig::getSetting('videoManualApproval'), 'required' => 1]));
         }
 
-        if (SysMod::isEnabled('webcam')) {
-            $oForm->addElement(new Select(t('Webcam Pictures Manual Approval:'), 'webcam_picture_manual_approval', ['1' => t('Enable'), '0' => t('Disable')], ['description' => t('This approval mode is experimental, do not use it on production.'), 'value' => DbConfig::getSetting('webcamPictureManualApproval'), 'required' => 1]));
-        }
-
 
         /********** Email **********/
         $oForm->addElement(new HTMLExternal('</div></div><div class="content" id="email"><div class="col-md-10"><h2 class="underline">' . t('Email Parameters') . '</h2>'));
@@ -589,7 +585,6 @@ class SettingForm
             'chat',
             'chatroulette',
             'forum',
-            'game',
             'hotornot',
             'picture',
             'video'

@@ -4,7 +4,7 @@
  *
  * @author           Pierre-Henry Soria <ph7software@gmail.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Install / Inc
  * @version          1.7
  */
@@ -220,12 +220,12 @@ function delete_dir($sPath)
 /**
  * Executes SQL queries.
  *
- * @param Db $oDb
+ * @param Database $oDb
  * @param string $sSqlFile SQL File.
  *
  * @return bool|array Returns TRUE if there are no errors, otherwise returns an ARRAY of error information.
  */
-function exec_query_file(Db $oDb, $sSqlFile)
+function exec_query_file(Database $oDb, $sSqlFile)
 {
     if (!is_file($sSqlFile)) {
         return false;

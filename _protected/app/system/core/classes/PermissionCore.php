@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
@@ -13,6 +13,7 @@ defined('PH7') or exit('Restricted access');
 use PH7\Framework\Layout\Html\Design;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
+use stdClass;
 
 abstract class PermissionCore extends Framework\Core\Core
 {
@@ -21,7 +22,7 @@ abstract class PermissionCore extends Framework\Core\Core
     /** @var UserCoreModel */
     private $oUserModel;
 
-    /** @var \stdClass */
+    /** @var stdClass */
     protected $group;
 
     public function __construct()
@@ -128,5 +129,14 @@ abstract class PermissionCore extends Framework\Core\Core
     public function adminSignInMsg()
     {
         return t('Please go to the admin panel and log in as administrator.');
+    }
+
+
+    /**
+     * @return bool TRUE if the admin is not logged in (TRUE as well if the admin use "login as user").
+     */
+    protected function isNotAdmin()
+    {
+        return !AdminCore::auth() || UserCore::isAdminLoggedAs();
     }
 }

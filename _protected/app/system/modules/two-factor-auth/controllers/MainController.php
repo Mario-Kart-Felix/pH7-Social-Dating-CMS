@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2016-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Two-Factor Auth / Controller
  */
 
@@ -130,7 +130,7 @@ class MainController extends Controller
     /**
      * Get Session Profile ID.
      *
-     * @return integer
+     * @return int
      *
      * @throws PH7InvalidArgumentException Explanatory message if the specified module is wrong.
      */

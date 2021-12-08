@@ -6,6 +6,8 @@ php:
   - 7.1
   - 7.2
   - 7.3
+  - 7.4
+  - 8.0
 
 env:
   - DB=mysql
@@ -20,8 +22,6 @@ install:
 before_script:
   # Set up databases for testing
   - mysql -e 'create database ph7cms_test;'
-  - mysql ph7cms_test < _install/data/sql/MySQL/pH7_SchemaGame.sql
-  - mysql ph7cms_test < _install/data/sql/MySQL/pH7_DataGame.sql
   - mysql ph7cms_test < _install/data/sql/MySQL/pH7_Core.sql
 
 script: phpunit --coverage-clover=coverage.clover

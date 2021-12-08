@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Inc / Class
  */
 
@@ -10,8 +10,11 @@ namespace PH7;
 
 use PH7\Framework\Cache\Cache;
 use PH7\Framework\Config\Config;
+use PH7\Framework\Error\CException\PH7InvalidArgumentException;
 use PH7\Framework\File\File;
-use PH7\Framework\Image\Image;
+use PH7\Framework\File\Permission\PermissionException;
+use PH7\Framework\File\TooLargeException;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Navigation\Browser;
 use stdClass;
 
@@ -27,14 +30,14 @@ class Blog extends WriteCore
      *
      * @return void
      *
-     * @throws \PH7\Framework\File\TooLargeException
-     * @throws \PH7\Framework\File\Permission\PermissionException
-     * @throws \PH7\Framework\Error\CException\PH7InvalidArgumentException
+     * @throws TooLargeException
+     * @throws PermissionException
+     * @throws PH7InvalidArgumentException
      */
     public function setThumb(stdClass $oPost, File $oFile)
     {
         if (!empty($_FILES['thumb']['tmp_name'])) {
-            $oImage = new Image($_FILES['thumb']['tmp_name']);
+            $oImage = new FileStorageImage($_FILES['thumb']['tmp_name']);
             if (!$oImage->validate()) {
                 \PFBC\Form::setError('form_blog', Form::wrongImgFileTypeMsg());
             } else {

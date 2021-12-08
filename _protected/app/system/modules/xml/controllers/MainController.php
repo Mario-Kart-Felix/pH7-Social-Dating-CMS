@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Xml / Controller
  */
 
@@ -62,7 +62,6 @@ class MainController extends Controller
         $this->view->pictures = $this->oDataModel->getPictures();
         $this->view->albums_videos = $this->oDataModel->getAlbumsVideos();
         $this->view->videos = $this->oDataModel->getVideos();
-        $this->view->games = $this->oDataModel->getGames();
 
         // For the Comments
         $this->generateCommentRouter($sAction, $mParam);
@@ -126,11 +125,6 @@ class MainController extends Controller
             case 'comment-video':
                 $this->view->table = 'video';
                 $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsVideos($mParam) : $this->oDataModel->getCommentsVideos();
-                break;
-
-            case 'comment-game':
-                $this->view->table = 'game';
-                $this->view->comments = $this->isParamValid($mParam) ? $this->oDataModel->getRecipientCommentsGames($mParam) : $this->view->comments = $this->oDataModel->getCommentsGames();
                 break;
         }
     }

@@ -15,15 +15,6 @@
   <priority>0.8</priority>
 </url>
 
-{if $is_webcam_enabled}
-  <url>
-    <loc>{{ $design->url('webcam','webcam','picture') }}</loc>
-    <lastmod>{current_date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-{/if}
-
 {if $is_forum_enabled}
   <url>
     <loc>{{ $design->url('forum','forum','index') }}</loc>
@@ -75,15 +66,6 @@
     <lastmod>{current_date}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-  </url>
-{/if}
-
-{if $is_game_enabled}
-  <url>
-    <loc>{{ $design->url('game','main','index') }}</loc>
-    <lastmod>{current_date}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 {/if}
 

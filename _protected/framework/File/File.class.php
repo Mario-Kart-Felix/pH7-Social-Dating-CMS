@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2020, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / File
  */
 
@@ -701,32 +701,6 @@ class File
         $this->deleteFile($sTmpFile);
 
         return $iWritten;
-    }
-
-    /**
-     * @param string $sPath
-     * @param array|string $mFiles
-     *
-     * @return array|string The Files.
-     */
-    public function readFiles($sPath = './', &$mFiles)
-    {
-        if (!($rHandle = opendir($sPath))) {
-            return false;
-        }
-
-        while (false !== ($sFile = readdir($rHandle))) {
-            if ($sFile !== '.' && $sFile !== '..') {
-                if (strpos($sFile, '.') === false) {
-                    $this->readFiles($sPath . PH7_DS . $sFile, $mFiles);
-                } else {
-                    $mFiles[] = $sPath . PH7_DS . $sFile;
-                }
-            }
-        }
-        closedir($rHandle);
-
-        return $mFiles;
     }
 
     /**

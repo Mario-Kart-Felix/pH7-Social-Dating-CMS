@@ -5,10 +5,12 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2011-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / Framework / Config
  * @version          1.2
  */
+
+declare(strict_types=1);
 
 namespace PH7\Framework\Config;
 
@@ -68,7 +70,7 @@ class Config implements Configurable
     /**
      * {@inheritdoc}
      */
-    public function load($sFile)
+    public function load($sFile): bool
     {
         if (!is_file($sFile)) {
             return false;
@@ -83,7 +85,7 @@ class Config implements Configurable
     /**
      * {@inheritdoc}
      */
-    public function getValue($sKey)
+    public function getValue($sKey): string
     {
         return $this->values[$sKey];
     }
@@ -93,7 +95,7 @@ class Config implements Configurable
      *
      * @throws KeyAlreadyExistsException
      */
-    public function setValue($sKey, $sValue)
+    public function setValue($sKey, $sValue): void
     {
         if (!array_key_exists($sKey, $this->values)) {
             $this->values[$sKey] = $sValue;

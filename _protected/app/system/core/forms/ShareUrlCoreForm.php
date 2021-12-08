@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Form
  */
 
@@ -16,8 +16,8 @@ class ShareUrlCoreForm
 {
     /**
      * @param $sUrl The URL to share. If you enter nothing, it will be the current URL.
-     * @param integer $iWidth Width of the form in pixel.
-     * @param boolean $bShowShareUrlLabel If TURE, it shows 'Share URL:' label beside the field.
+     * @param int $iWidth Width of the form in pixel.
+     * @param bool $bShowShareUrlLabel If TURE, it shows 'Share URL:' label beside the field.
      *
      * @return void
      */

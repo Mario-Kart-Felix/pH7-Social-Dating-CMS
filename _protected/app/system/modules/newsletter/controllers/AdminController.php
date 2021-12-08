@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Newsletter / Controller
  */
 
@@ -15,6 +15,8 @@ use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
 {
+    use BulkAction;
+
     const SUBSCRIBERS_PER_PAGE = 30;
     const REDIRECTION_DELAY_IN_SEC = 5;
 
@@ -101,11 +103,13 @@ class AdminController extends Controller
     public function deleteAll()
     {
         $sMsg = ''; // Default msg value
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
 
         if (!(new SecurityToken)->check('subscriber_action')) {
             $sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $sEmail) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $sEmail) {
                 $this->oSubscriberModel->unsubscribe($sEmail);
             }
 

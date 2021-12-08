@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Blog / Form
  */
 
@@ -10,11 +10,11 @@ namespace PH7;
 
 use PFBC\Element\Button;
 use PFBC\Element\Checkbox;
-use PFBC\Element\CKEditor;
 use PFBC\Element\File;
 use PFBC\Element\Hidden;
 use PFBC\Element\HTMLExternal;
 use PFBC\Element\Radio;
+use PFBC\Element\Textarea;
 use PFBC\Element\Textbox;
 use PFBC\Element\Token;
 use PFBC\Validation\Str;
@@ -74,22 +74,90 @@ class AdminBlogForm
             )
         );
         $oForm->addElement(new HTMLExternal('<div class="label_flow">'));
-        $oForm->addElement(new Checkbox(t('Categories:'), 'category_id', $aCategoryNames, ['description' => t('Select a category that fits the best for your article.'), 'required' => 1]));
+        $oForm->addElement(
+            new Checkbox(
+                t('Categories:'),
+                'category_id',
+                $aCategoryNames,
+                ['description' => t('Select a category that fits the best for your article.'), 'required' => 1]
+            )
+        );
         $oForm->addElement(new HTMLExternal('</div>'));
-        $oForm->addElement(new CKEditor(t('Body:'), 'content', ['validation' => new Str(30), 'required' => 1]));
-        $oForm->addElement(new Textbox(t('Language of the article:'), 'lang_id', ['description' => t('e.g., "en", "fr", "es", "js"'), 'value' => PH7_LANG_CODE, 'pattern' => '[a-z]{2}', 'validation' => new Str(2, 2), 'required' => 1]));
-        $oForm->addElement(new Textbox(t('Slogan:'), 'slogan', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
+        $oForm->addElement(
+            new Textarea(t('Body:'), 'content', ['validation' => new Str(30), 'rows' => 8, 'required' => 1])
+        );
+        $oForm->addElement(
+            new Textbox(
+                t('Language of the article:'),
+                'lang_id',
+                [
+                    'description' => t('e.g., "en", "fr", "es", "js"'),
+                    'value' => PH7_LANG_CODE,
+                    'pattern' => '[a-z]{2}',
+                    'validation' => new Str(2, 2),
+                    'required' => 1
+                ]
+            )
+        );
+        $oForm->addElement(
+            new Textbox(
+                t('Slogan:'),
+                'slogan',
+                ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]
+            )
+        );
         $oForm->addElement(new File(t('Thumbnail:'), 'thumb', ['accept' => 'image/*']));
-        $oForm->addElement(new Textbox(t('Tags:'), 'tags', ['description' => t('Separate keywords by commas and without spaces between the commas.'), 'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
-        $oForm->addElement(new Textbox(t('Title (meta tag):'), 'page_title', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]));
-        $oForm->addElement(new Textbox(t('Description (meta tag):'), 'meta_description', ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
-        $oForm->addElement(new Textbox(t('Keywords (meta tag):'), 'meta_keywords', ['description' => t('Separate keywords by commas.'), 'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]));
+        $oForm->addElement(
+            new Textbox(
+                t('Tags:'),
+                'tags',
+                [
+                    'description' => t('Separate keywords by commas and without spaces between the commas.'),
+                    'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
+                ]
+            )
+        );
+        $oForm->addElement(
+            new Textbox(
+                t('Title (meta tag):'),
+                'page_title',
+                ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH), 'required' => 1]
+            )
+        );
+        $oForm->addElement(
+            new Textbox(
+                t('Description (meta tag):'),
+                'meta_description',
+                ['validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)]
+            )
+        );
+        $oForm->addElement(
+            new Textbox(
+                t('Keywords (meta tag):'),
+                'meta_keywords',
+                [
+                    'description' => t('Separate keywords by commas.'),
+                    'validation' => new Str(Form::MIN_STRING_FIELD_LENGTH, Form::MAX_STRING_FIELD_LENGTH)
+                ]
+            )
+        );
         $oForm->addElement(new Textbox(t('Robots (meta tag):'), 'meta_robots', ['validation' => new Str(2, 50)]));
         $oForm->addElement(new Textbox(t('Author (meta tag):'), 'meta_author', ['validation' => new Str(2, 50)]));
         $oForm->addElement(new Textbox(t('Copyright (meta tag):'), 'meta_copyright', ['validation' => new Str(2, 50)]));
-        $oForm->addElement(new Radio(t('Enable Comment:'), 'enable_comment', ['1' => t('Enable'), '0' => t('Disable')], ['value' => '1', 'required' => 1]));
+        $oForm->addElement(
+            new Radio(
+                t('Enable Comment:'),
+                'enable_comment',
+                ['1' => t('Enable'), '0' => t('Disable')],
+                ['value' => '1', 'required' => 1]
+            )
+        );
         $oForm->addElement(new Button);
-        $oForm->addElement(new HTMLExternal('<script src="' . PH7_URL_TPL_SYS_MOD . 'blog/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'));
+        $oForm->addElement(
+            new HTMLExternal(
+                '<script src="' . PH7_URL_TPL_SYS_MOD . 'blog/' . PH7_TPL . PH7_TPL_MOD_NAME . PH7_SH . PH7_JS . 'common.js"></script>'
+            )
+        );
         $oForm->render();
     }
 }

@@ -1,6 +1,9 @@
 <?php
+
+use PH7\Admin;
+
 defined('PH7') or exit('Restricted access');
-if (!\PH7\Admin::auth()) exit('Restricted access'); // Accessible only for admins
+if (!Admin::auth()) exit('Restricted access'); // Accessible only for admins
 
 // Implement similar functionality in PHP 5.2 or 5.3
 // http://php.net/manual/class.recursivecallbackfilteriterator.php#110974
@@ -510,8 +513,8 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver {
      * Get stat `owner`, `group` and `isowner` by `uid` and `gid`
      * Sub-fuction of _stat() and _scandir()
      *
-     * @param integer $uid
-     * @param integer $gid
+     * @param int $uid
+     * @param int $gid
      * @return array  stat
      */
     protected function getOwnerStat($uid, $gid) {
@@ -1160,7 +1163,7 @@ class elFinderVolumeLocalFileSystem extends elFinderVolumeDriver {
      * Delete dirctory trees
      *
      * @param string $localpath path need convert encoding to server encoding
-     * @return boolean
+     * @return bool
      * @author Naoki Sawada
      */
     protected function delTree($localpath) {

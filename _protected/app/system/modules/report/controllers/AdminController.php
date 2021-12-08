@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Report / Controller
  */
 
@@ -16,6 +16,8 @@ use PH7\Framework\Url\Header;
 
 class AdminController extends Controller
 {
+    use BulkAction;
+
     const REPORTS_PER_PAGE = 15;
 
     /** @var ReportModel */
@@ -101,10 +103,13 @@ class AdminController extends Controller
 
     public function deleteAll()
     {
+        $aActions = $this->httpRequest->post('action');
+        $bActionsEligible = $this->areActionsEligible($aActions);
+
         if (!(new Token)->check('report_action')) {
             $this->sMsg = Form::errorTokenMsg();
-        } elseif (count($this->httpRequest->post('action')) > 0) {
-            foreach ($this->httpRequest->post('action') as $iId) {
+        } elseif ($bActionsEligible) {
+            foreach ($aActions as $iId) {
                 $iId = (int)$iId;
                 $this->oReportModel->delete($iId);
             }

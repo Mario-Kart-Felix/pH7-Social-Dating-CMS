@@ -5,7 +5,7 @@
  *
  * @author           Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright        (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license          GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license          MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package          PH7 / App / System / Core / Model
  * @version          1.6
  */
@@ -48,7 +48,7 @@ class ExistsCoreModel
     /**
      * Checks if the same ID already exists. Ignore the ghost ID (1)
      *
-     * @param integer $iId
+     * @param int $iId
      * @param string $sTable Default is "Members"
      *
      * @return bool

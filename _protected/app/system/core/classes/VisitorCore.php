@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2017-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Core / Class
  */
 
@@ -48,10 +48,10 @@ class VisitorCore
         unset($oVisitorModel);
     }
 
-    public function isViewUpdateEligible(stdClass $oPrivacyViewsUser, stdClass $oPrivacyViewsVisitor)
+    public function isViewUpdateEligible(stdClass $oUserPrivacyViews, stdClass $oVisitorPrivacyViews)
     {
-        return $oPrivacyViewsUser->userSaveViews === PrivacyCore::YES &&
-            $oPrivacyViewsVisitor->userSaveViews === PrivacyCore::YES &&
+        return $oUserPrivacyViews->userSaveViews === PrivacyCore::YES &&
+            $oVisitorPrivacyViews->userSaveViews === PrivacyCore::YES &&
             !$this->oProfile->isOwnProfile();
     }
 }

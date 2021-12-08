@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Admin / From / Processing
  */
 
@@ -10,7 +10,7 @@ namespace PH7;
 
 defined('PH7') or exit('Restricted access');
 
-use PH7\Framework\Image\Image;
+use PH7\Framework\Image\FileStorage as FileStorageImage;
 use PH7\Framework\Layout\Gzip\Gzip;
 use PH7\Framework\Mvc\Model\DbConfig;
 use PH7\Framework\Navigation\Browser;
@@ -23,7 +23,7 @@ class SettingFormProcess extends Form
     const LOGO_HEIGHT = 45;
     const MAX_WATERMARK_SIZE = 5;
 
-    /** @var boolean */
+    /** @var bool */
     private $bIsErr = false;
 
     /** @var array */
@@ -82,7 +82,6 @@ class SettingFormProcess extends Form
         'picture_manual_approval' => 'pictureManualApproval',
         'nudity_filter' => 'nudityFilter',
         'video_manual_approval' => 'videoManualApproval',
-        'webcam_picture_manual_approval' => 'webcamPictureManualApproval',
 
         // Email
         'email_name' => 'emailName',
@@ -247,7 +246,7 @@ class SettingFormProcess extends Form
     private function updateLogo()
     {
         if ($this->isLogoUploaded()) {
-            $oLogo = new Image($_FILES['logo']['tmp_name']);
+            $oLogo = new FileStorageImage($_FILES['logo']['tmp_name']);
             if (!$oLogo->validate()) {
                 \PFBC\Form::setError('form_setting', Form::wrongImgFileTypeMsg());
                 $this->bIsErr = true;

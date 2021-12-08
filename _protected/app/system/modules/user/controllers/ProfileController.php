@@ -3,8 +3,8 @@
  * @title          Profile Controller
  *
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
- * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @copyright      (c) 2012-2021, Pierre-Henry Soria. All Rights Reserved.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / User / Controller
  */
 
@@ -17,7 +17,7 @@ use PH7\Framework\Module\Various as SysMod;
 use PH7\Framework\Mvc\Router\Uri;
 use PH7\Framework\Url\Header;
 use stdClass;
-use Teapot\StatusCode;
+use PH7\JustHttp\StatusCode;
 
 class ProfileController extends ProfileBaseController
 {
@@ -35,9 +35,8 @@ class ProfileController extends ProfileBaseController
         // Set the Profile username
         $this->sUsername = $this->httpRequest->get('username', 'string');
 
-        // Set the Profile ID and Visitor ID
-        $this->iProfileId = $this->oUserModel->getId(null, $this->sUsername);
-        $this->iVisitorId = (int)$this->session->get('member_id');
+        $this->setProfileId($this->oUserModel->getId(null, $this->sUsername));
+        $this->setVisitorId($this->session->get('member_id'));
     }
 
     public function index()
@@ -53,8 +52,8 @@ class ProfileController extends ProfileBaseController
                 $this->redirectToCoolProfileStyle();
             }
 
-            // The administrators can view all profiles and profile visits are not saved.
-            if (!AdminCore::auth() || UserCore::isAdminLoggedAs()) {
+            // The admins can view all profiles. And profile views won't be increased when admins visit a profile
+            if ($this->isNotAdmin()) {
                 $this->initPrivacy($oUser);
             }
 
@@ -69,17 +68,38 @@ class ProfileController extends ProfileBaseController
 
             $aData = $this->getFilteredData($oUser, $oFields);
 
-            $this->view->page_title = t('Meet %0%. A %1% looking for %2% - %3% years - %4% - %5% %6%',
-                $aData['first_name'], t($oUser->sex), t($oUser->matchSex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
+            $this->view->page_title = t(
+                'Meet %0%. A %1% looking for %2% - %3% years - %4% - %5% %6%',
+                $aData['first_name'],
+                t($oUser->sex),
+                t($oUser->matchSex),
+                $aData['age'],
+                t($aData['country']),
+                $aData['city'],
+                $aData['state']
+            );
 
-            $this->view->meta_description = t('Meet %0% %1% | %2% - %3%', $aData['first_name'], $aData['last_name'],
-                $oUser->username, substr($aData['description'], 0, 100));
+            $this->view->meta_description = t(
+                'Meet %0% %1% | %2% - %3%',
+                $aData['first_name'],
+                $aData['last_name'],
+                $oUser->username,
+                substr($aData['description'], 0, 100)
+            );
 
-            $this->view->h1_title = t('Meet <span class="pH1">%0%</span> on <span class="pH0">%site_name%</span>',
-                $aData['first_name']);
+            $this->view->h1_title = t(
+                'Meet <span class="pH1">%0%</span> on <span class="pH0">%site_name%</span>',
+                $aData['first_name']
+            );
 
-            $this->view->h2_title = t('A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
-                t($oUser->sex), $aData['age'], t($aData['country']), $aData['city'], $aData['state']);
+            $this->view->h2_title = t(
+                'A <span class="pH1">%0%</span> of <span class="pH3">%1% years</span>, from <span class="pH2">%2%, %3% %4%</span>',
+                t($oUser->sex),
+                $aData['age'],
+                t($aData['country']),
+                $aData['city'],
+                $aData['state']
+            );
 
             $this->imageToSocialMetaTags($oUser);
             $this->setMenuBar($aData['first_name'], $oUser);
@@ -192,6 +212,15 @@ class ProfileController extends ProfileBaseController
     private function doesProfileExist(stdClass $oUser)
     {
         return !empty($oUser->username) && $this->str->equalsIgnoreCase($this->sUsername, $oUser->username);
+    }
+
+
+    /**
+     * @return bool TRUE if the admin is not logged in (TRUE as well if the admin use "login as user").
+     */
+    private function isNotAdmin()
+    {
+        return !AdminCore::auth() || UserCore::isAdminLoggedAs();
     }
 
     /**

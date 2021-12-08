@@ -3,8 +3,8 @@
 -- Title:         SQL Core (base) Install File
 --
 -- Author:        Pierre-Henry Soria <hello@ph7cms.com>
--- Copyright:     (c) 2017-2020, Pierre-Henry Soria. All Rights Reserved.
--- License:       GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+-- Copyright:     (c) 2017-2021, Pierre-Henry Soria. All Rights Reserved.
+-- License:       MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
 -- Package:       PH7 / Install / Data / Sql / PostgreSQL
 --
 -- Upgrade:       Convert the MySQL file version to PostgreSQL
@@ -72,12 +72,12 @@ CREATE TABLE IF NOT EXISTS ph7_memberships (
 ALTER SEQUENCE ph7_memberships_seq RESTART WITH 1;
 
 INSERT INTO ph7_memberships (groupId, name, description, permissions, price, expirationDays, enable) VALUES
-(1, 'Visitor (not visible)', 'This subscription is offered to all visitors who visit the site.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1'),
-(9, 'Pending (not visible)', 'Pending subscription provisional migration to a different subscription.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0'),
-(2, 'Regular (Free)', 'Free Membership.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1'),
-(4, 'Platinum', 'The membership for the small budget.', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '1'),
-(5, 'Silver', 'The premium membership!', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '1'),
-(6, 'Gold', 'The must membership! The Gold!!!', 'a:24:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:12:"games_access";s:1:"1";s:13:"webcam_access";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1');
+(1, 'Visitor (not visible)', 'This subscription is offered to all visitors who visit the site.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 0, '1'),
+(9, 'Pending (not visible)', 'Pending subscription provisional migration to a different subscription.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"0";s:10:"send_mails";s:1:"0";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"0";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"0";s:17:"instant_messaging";s:1:"0";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"0";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"0";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"0";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"0";s:19:"answer_forum_topics";s:1:"0";s:18:"member_site_access";s:1:"0";}', 0.00, 15, '0'),
+(2, 'Regular (Free)', 'Free Membership.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 0.00, 0, '1'),
+(4, 'Platinum', 'The membership for the small budget.', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 9.99, 5, '1'),
+(5, 'Silver', 'The premium membership!', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 19.99, 10, '1'),
+(6, 'Gold', 'The must membership! The Gold!!!', 'a:22:{s:21:"quick_search_profiles";s:1:"1";s:24:"advanced_search_profiles";s:1:"1";s:10:"read_mails";s:1:"1";s:10:"send_mails";s:1:"1";s:13:"view_pictures";s:1:"1";s:15:"upload_pictures";s:1:"1";s:11:"view_videos";s:1:"1";s:13:"upload_videos";s:1:"1";s:17:"instant_messaging";s:1:"1";s:4:"chat";s:1:"1";s:12:"chatroulette";s:1:"1";s:10:"hot_or_not";s:1:"1";s:15:"love_calculator";s:1:"1";s:10:"read_notes";s:1:"1";s:11:"write_notes";s:1:"1";s:15:"read_blog_posts";s:1:"1";s:13:"view_comments";s:1:"1";s:14:"write_comments";s:1:"1";s:12:"forum_access";s:1:"1";s:19:"create_forum_topics";s:1:"1";s:19:"answer_forum_topics";s:1:"1";s:18:"member_site_access";s:1:"1";}', 29.99, 30, '1');
 
 
 CREATE SEQUENCE ph7_members_seq;
@@ -330,7 +330,7 @@ CREATE TABLE IF NOT EXISTS ph7_albums_pictures (
   albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_albums_pictures_seq'),
   profileId int check (profileId > 0) NOT NULL,
   name varchar(80) NOT NULL,
-  thumb char(11) NOT NULL,
+  thumb char(11) NOT NULL, -- e.g. 2-thumb.jpg
   approved enum('1','0') DEFAULT '1',
   votes int check (votes > 0) DEFAULT 0,
   score double precision check (score > 0) DEFAULT 0,
@@ -351,7 +351,7 @@ CREATE TABLE IF NOT EXISTS ph7_albums_videos (
   albumId int check (albumId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_albums_videos_seq'),
   profileId int check (profileId > 0) NOT NULL,
   name varchar(80) NOT NULL,
-  thumb char(11) NOT NULL,
+  thumb char(11) NOT NULL, -- e.g. 5-thumb.jpg
   approved enum('1','0') DEFAULT '1',
   votes int check (votes > 0) DEFAULT 0,
   score double precision check (score > 0) DEFAULT 0,
@@ -375,6 +375,7 @@ CREATE TABLE IF NOT EXISTS ph7_pictures (
   title varchar(80) NOT NULL,
   description varchar(255) DEFAULT NULL,
   file varchar(40) NOT NULL,
+  file_cdn_url varchar(40) NOT NULL,
   approved enum('1','0') DEFAULT '1',
   votes int check (votes > 0) DEFAULT 0,
   score double precision check (score > 0) DEFAULT 0,
@@ -662,25 +663,6 @@ CREATE TABLE IF NOT EXISTS ph7_comments_video (
 ALTER SEQUENCE ph7_comments_video_seq RESTART WITH 1;
 
 
-CREATE SEQUENCE ph7_comments_game_seq;
-
-CREATE TABLE IF NOT EXISTS ph7_comments_game (
-  commentId int check (commentId > 0) NOT NULL DEFAULT NEXTVAL ('ph7_comments_game_seq'),
-  sender int check (sender > 0) NOT NULL,
-  recipient int check (recipient > 0) NOT NULL,
-  comment text NOT NULL,
-  createdDate timestamp(0) NULL,
-  updatedDate timestamp(0) DEFAULT NULL,
-  approved enum('1','0') NOT NULL DEFAULT '1',
-  PRIMARY KEY (commentId),
-  -- Maybe we'll let the comments of the members even if they are deleted.
-  -- FOREIGN KEY (sender) ph7_members(profileId),
-  FOREIGN KEY (recipient) REFERENCES ph7_games(gameId) -- Warning: You must first download the file "pH7_Game.sql" for this table can be inserted because it uses a foreign key.
-)  ;
-
-ALTER SEQUENCE ph7_comments_game_seq RESTART WITH 1;
-
-
 CREATE SEQUENCE ph7_comments_profile_seq;
 
 CREATE TABLE IF NOT EXISTS ph7_comments_profile (
@@ -942,6 +924,7 @@ CREATE TABLE IF NOT EXISTS ph7_affiliates_log_sess (
 CREATE TABLE IF NOT EXISTS ph7_members_background (
   profileId int check (profileId > 0) NOT NULL,
   file varchar(5) NOT NULL,
+  file_cdn_url varchar(40) NOT NULL,
   approved smallint check (approved > 0) NOT NULL DEFAULT '1',
   PRIMARY KEY profileId (profileId),
   FOREIGN KEY (profileId) REFERENCES ph7_members(profileId)
@@ -1081,12 +1064,10 @@ INSERT INTO ph7_sys_mods_enabled (moduleTitle, folderName, premiumMod, enabled) 
 ('Dating-Style Profile Page', 'cool-profile-page', '0', '1'),
 ('Birthday: Let''s Celebrate Birthdays', 'birthday', '0', '1'),
 ('Google Maps', 'map', '0', '1'),
-('Game', 'game', '0', '0'),
 ('Newsletter', 'newsletter', '0', '1'),
 ('Invite Friends', 'invite', '0', '1'),
 ('SMS Verification', 'sms-verification', '0', '0'),
 ('Social Media Auth (connect)', 'connect', '0', '0'),
-('Webcam', 'webcam', '0', '0'),
 ('Progressive Web App (HTTPS required)', 'pwa', '0', '0');
 
 
@@ -1107,7 +1088,7 @@ ALTER SEQUENCE ph7_modules_seq RESTART WITH 1;
 
 INSERT INTO ph7_modules (vendorName, moduleName, version, active) VALUES
 /* Gives the current version of pH7CMS SQL schema (this helps to update and shows whether it is necessary or not to update the database as well) */
-('pH7CMS', 'SQL System Schema', '1.5.9', 1);
+('pH7CMS', 'SQL System Schema', '1.6.1', 1);
 
 
 CREATE SEQUENCE ph7_report_seq;
@@ -1204,7 +1185,6 @@ INSERT INTO ph7_settings (settingName, settingValue, description, settingGroup) 
 ('noteManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('pictureManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
 ('videoManualApproval', 0, '0 to disable or 1 to enable ', 'moderation'),
-('webcamPictureManualApproval', 0, '0 to disable or 1 to enable', 'moderation'),
 ('nudityFilter', 0, '1 = enable | 0 = disable', 'moderation'),
 ('defaultVideo', @sDefaultVideoUrl, 'Video by default if no video is found', 'video'),
 ('autoplayVideo', 1, '1 = Autoplay is enabled, 0 = Autoplay is disabled', 'video'),

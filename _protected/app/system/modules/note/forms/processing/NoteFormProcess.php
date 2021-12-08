@@ -2,7 +2,7 @@
 /**
  * @author         Pierre-Henry Soria <hello@ph7cms.com>
  * @copyright      (c) 2012-2019, Pierre-Henry Soria. All Rights Reserved.
- * @license        GNU General Public License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
+ * @license        MIT License; See PH7.LICENSE.txt and PH7.COPYRIGHT.txt in the root directory.
  * @package        PH7 / App / System / Module / Note / Form / Processing
  */
 
@@ -63,7 +63,7 @@ class NoteFormProcess extends Form implements NudityDetectable
                 'approved' => $this->iApproved
             ];
 
-            if (count($this->httpRequest->post('category_id')) > Note::MAX_CATEGORY_ALLOWED) {
+            if ($this->hasCategoriesReachedLimit()) {
                 \PFBC\Form::setError(
                     'form_note',
                     t('You cannot select more than %0% categories.', Note::MAX_CATEGORY_ALLOWED)
@@ -102,7 +102,7 @@ class NoteFormProcess extends Form implements NudityDetectable
     /**
      * Set the categorie(s).
      *
-     * @param integer $iProfileId
+     * @param int $iProfileId
      * @param NoteModel $oNoteModel
      *
      * @return void
@@ -112,11 +112,25 @@ class NoteFormProcess extends Form implements NudityDetectable
      */
     private function setCategories($iProfileId, NoteModel $oNoteModel)
     {
-        $iNoteId = Db::getInstance()->lastInsertId();
+        $aCategoryIds = $this->httpRequest->post('category_id', Http::NO_CLEAN);
 
-        foreach ($this->httpRequest->post('category_id', Http::NO_CLEAN) as $iCategoryId) {
-            $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
+        if (is_array($aCategoryIds)) {
+            $iNoteId = Db::getInstance()->lastInsertId();
+
+            foreach ($aCategoryIds as $iCategoryId) {
+                $oNoteModel->addCategory($iCategoryId, $iNoteId, $iProfileId);
+            }
         }
+    }
+
+    /**
+     * @return bool TRUE if the maximum allowed categories has been reached, FALSE otherwise.
+     */
+    private function hasCategoriesReachedLimit()
+    {
+        $aCategories = $this->httpRequest->post('category_id');
+
+        return is_array($aCategories) && count($aCategories) > Note::MAX_CATEGORY_ALLOWED;
     }
 
     /**
