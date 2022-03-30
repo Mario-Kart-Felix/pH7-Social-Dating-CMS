@@ -9,9 +9,11 @@
  * @package          PH7 / Install / Library
  */
 
+declare(strict_types=1);
+
 namespace PH7;
 
-defined('PH7') or die('Restricted access');
+defined('PH7') or exit('Restricted access');
 
 use Smarty;
 
@@ -50,11 +52,9 @@ abstract class Controller implements Controllable
     const DEFAULT_LANG = 'en';
     const DEFAULT_THEME = 'base';
 
-    /** @var Smarty */
-    protected $oView;
+    protected Smarty $oView;
 
-    /** @var string */
-    protected $sCurrentLang;
+    protected string $sCurrentLang;
 
     public function __construct()
     {
@@ -76,7 +76,6 @@ abstract class Controller implements Controllable
         $this->oView->setTemplateDir(PH7_ROOT_INSTALL . 'views/' . self::DEFAULT_THEME);
         $this->oView->setCompileDir(PH7_ROOT_INSTALL . 'data/caches/smarty_compile');
         $this->oView->setCacheDir(PH7_ROOT_INSTALL . 'data/caches/smarty_cache');
-        $this->oView->setPluginsDir(PH7_ROOT_INSTALL . 'library/Smarty/plugins');
 
         // Smarty Cache
         $this->oView->setCaching(Smarty::CACHING_OFF);
@@ -101,7 +100,7 @@ abstract class Controller implements Controllable
      *
      * @return void
      */
-    protected function initializePHPSession()
+    protected function initializePHPSession(): void
     {
         if (session_status() !== PHP_SESSION_ACTIVE) {
             @session_start();
@@ -113,7 +112,7 @@ abstract class Controller implements Controllable
      *
      * @return void
      */
-    protected function checkTimezone()
+    protected function checkTimezone(): void
     {
         if (!ini_get(self::PHP_TIMEZONE_DIRECTIVE)) {
             date_default_timezone_set(PH7_DEFAULT_TIMEZONE);

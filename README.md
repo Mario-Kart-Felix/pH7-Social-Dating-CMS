@@ -1,6 +1,6 @@
 # pH7 Social Dating CMS
 
-## ⚡️The 2021 <span style="text-decoration:underline">Killer Dating WebApp Builder</span>! ❤️
+## ⚡️The 2022 <span style="text-decoration:underline">Killer Dating WebApp Builder</span>! ❤️
 
 ### 🚀 The Most Secure, User-Friendly & Open Source Social Dating Web App Software
 
@@ -32,19 +32,21 @@ You get and own all data and files, hosted on your own server! ✌️
 
 👉 Convinced by the software? ☕️ Wanna **[offer me a coffee](https://www.buymeacoffee.com/ph7cms)**, and boost the software development at the same time?
 
+[![Buy Me A Coffee](static/img/buymeacoffee-logo.svg)](https://www.buymeacoffee.com/ph7cms)
+
 
 ## 📖 Contents
 
 - [Software Overview](#-software-overview-)
   - [Features](#-how-powerful-your-social-dating-webapp-will-be-)
-- [Requirements](#-requirements)  
+- [Requirements](#-requirements)
 - [Installation](#-installation)
   - [Nginx Configuration (only for nginx server)](#-nginx-configuration)
 - [Translations](#-translations)
 - [Resources / Documentation](#-documentation)
 - [Contributing to the project](#-contributing)
 - [License](#%EF%B8%8F-license)
-- [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)  
+- [Why pH7CMS is Eco-Friendly?](#-ph7cms-the-eco-friendly-cms-%EF%B8%8F)
 - [The toolsets I use](#-toolssoftware-used-to-develop-ph7cms)
 - [About Me](#-the-cook)
   - [Contact Me](#-contact)
